@@ -2,13 +2,13 @@
 
 import rclpy
 import threading
-from rclpy.executors import MultiThreadedExecutor
+from rclpy.executors import SingleThreadedExecutor
 from ariac_tutorials.competition_interface import CompetitionInterface
 
 def main(args=None):
     rclpy.init(args=args)
     interface = CompetitionInterface(enable_moveit=False)
-    executor = MultiThreadedExecutor()
+    executor = SingleThreadedExecutor()
     executor.add_node(interface)
 
     spin_thread = threading.Thread(target=executor.spin)
